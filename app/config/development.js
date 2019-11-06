@@ -1,3 +1,3 @@
 export default {
-  endpointHost: 'http://local.ucastme.de:9292',
+  endpointHost: 'http://localhost:8080',
 };

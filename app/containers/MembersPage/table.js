@@ -26,12 +26,7 @@ const TableWrapper = styled.div`
 const rowsPerPage = 25;
 const rowsPerPageOptions = [rowsPerPage];
 
-export function DataTable({
-  rows,
-  columns,
-  pagination,
-  onChangePage,
-}) {
+export function DataTable({ rows, columns, pagination, onChangePage }) {
   const page = (pagination && pagination.page - 1) || 0;
   const totalRows = (rows && rows.length) || 0;
   const classes = useStyles();
@@ -71,20 +66,22 @@ export function DataTable({
           </TableBody>
         </Table>
       </TableWrapper>
-      <TablePagination
-        page={page}
-        count={totalRows}
-        component="div"
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={rowsPerPageOptions}
-        onChangePage={onChangePage}
-        backIconButtonProps={{
-          'aria-label': 'previous page',
-        }}
-        nextIconButtonProps={{
-          'aria-label': 'next page',
-        }}
-      />
+      {onChangePage && (
+        <TablePagination
+          page={page}
+          count={totalRows}
+          component="div"
+          rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={rowsPerPageOptions}
+          onChangePage={onChangePage}
+          backIconButtonProps={{
+            'aria-label': 'previous page',
+          }}
+          nextIconButtonProps={{
+            'aria-label': 'next page',
+          }}
+        />
+      )}
     </Paper>
   );
 }

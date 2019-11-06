@@ -15,12 +15,6 @@ const makeSelectMembers = () =>
     substate => substate.members,
   );
 
-const makeSelectPagination = () =>
-  createSelector(
-    selectMembersPageDomain,
-    substate => substate.pagination,
-  );
-
 /**
  * Default selector used by MembersPage
  */
@@ -31,4 +25,4 @@ const makeSelectMembersPage = () =>
   );
 
 export default makeSelectMembersPage;
-export { makeSelectMembers, makeSelectPagination };
+export { makeSelectMembers };

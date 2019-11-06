@@ -1,3 +1,3 @@
 export default {
-  endpointHost: 'https://api-staging.ucastme.de',
+  endpointHost: 'https://api-staging.studies.de',
 };

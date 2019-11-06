@@ -14,7 +14,6 @@ const fieldsPerRow = 4;
 const useStyles = makeStyles(theme => ({
   card: {
     minWidth: 275,
-    marginBottom: theme.spacing(2),
   },
   cardContent: {
     paddingTop: theme.spacing(0),

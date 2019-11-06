@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Members',
   },
+  newMember: {
+    id: `${scope}.newMember`,
+    defaultMessage: 'New Member',
+  },
 });

@@ -17,9 +17,10 @@ import pageContainer, { useLoadableContainer } from 'utils/pageContainer';
 import LayoutWrapper from 'components/LayoutWrapper';
 import PagePath from 'components/PagePath';
 
-import { makeSelectMembers, makeSelectPagination } from './selectors';
+import { makeSelectMembers } from './selectors';
 import { loadMembersAction } from './actions';
 import messages from './messages';
+import MemberForm from './form';
 import DataTable from './table';
 import Filter from './filter';
 import reducer from './reducer';
@@ -27,29 +28,37 @@ import saga from './saga';
 
 const columns = [
   { id: 'id', label: 'ID' },
-  { id: 'name', label: 'Name', render: (value, column, row) => `${row.last_name}, ${row.first_name}` },
-  { id: 'birthdate', label: 'Birthdate', render: (value, column, row) => moment(value).format('L') },
-  { id: 'family', label: 'Family', render: (value, column, row) => `${row.family_id} - ${row.family.name}` },
+  {
+    id: 'name',
+    label: 'Name',
+    render: (value, column, row) => `${row.last_name}, ${row.first_name}`,
+  },
+  {
+    id: 'birthdate',
+    label: 'Birthdate',
+    render: value => moment(value).format('L'),
+  },
+  {
+    id: 'family',
+    label: 'Family',
+    render: (value, column, row) => `${row.family_id} - ${row.family.name}`,
+  },
 ];
 
-const breadcrumbs = [{ label: 'Home', to: '/'}];
+const breadcrumbs = [{ label: 'Home', to: '/' }];
 const header = <FormattedMessage {...messages.header} />;
 
-export function MembersPage({ dispatch, message, members, pagination }) {
+export function MembersPage({ dispatch, message, members }) {
   const [Loadable, trackPromise] = useLoadableContainer();
   useInjectReducer({ key: 'membersPage', reducer });
   useInjectSaga({ key: 'membersPage', saga });
 
-  const loadMembers = page => {
+  const loadMembers = () => {
     trackPromise(
-      dispatch(loadMembersAction(page)).catch(error => {
+      dispatch(loadMembersAction()).catch(error => {
         message.error(error.message);
       }),
     );
-  };
-
-  const handleChangePage = (event, newPage) => {
-    loadMembers(newPage + 1);
   };
 
   const handleSearch = () => {
@@ -58,18 +67,11 @@ export function MembersPage({ dispatch, message, members, pagination }) {
 
   return (
     <LayoutWrapper>
-      <PagePath
-        header={header}
-        pages={breadcrumbs}
-      />
+      <PagePath header={header} pages={breadcrumbs} />
       <Loadable>
         <Filter fields={columns} onSearch={handleSearch} />
-        <DataTable
-          rows={members}
-          columns={columns}
-          pagination={pagination}
-          onChangePage={handleChangePage}
-        />
+        <MemberForm />
+        <DataTable rows={members} columns={columns} />
       </Loadable>
     </LayoutWrapper>
   );
@@ -79,12 +81,10 @@ MembersPage.propTypes = {
   message: PropTypes.object,
   dispatch: PropTypes.func,
   members: PropTypes.array,
-  pagination: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   members: makeSelectMembers(),
-  pagination: makeSelectPagination(),
 });
 
 const withPageContainer = pageContainer(mapStateToProps);
