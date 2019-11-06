@@ -1,0 +1,63 @@
+{
+  "members": [
+    {
+      "id": 1,
+      "first_name": "Person 1",
+      "last_name": "Surname 1",
+      "birthdate": "2000-01-01",
+      "family_id": 2,
+      "family": {
+        "id": 2,
+        "name": "Family 2"
+      }
+    },
+    {
+      "id": 2,
+      "first_name": "Person 2",
+      "last_name": "Surname 2",
+      "birthdate": "2000-02-02",
+      "family_id": 1,
+      "family": {
+        "id": 1,
+        "name": "Family 1"
+      }
+    },
+    {
+      "id": 3,
+      "first_name": "Person 3",
+      "last_name": "Surname 3",
+      "birthdate": "2000-03-03",
+      "family_id": 2,
+      "family": {
+        "id": 2,
+        "name": "Family 2"
+      }
+    },
+    {
+      "id": 4,
+      "first_name": "Person 4",
+      "last_name": "Surname 4",
+      "birthdate": "2000-04-04",
+      "family_id": 1,
+      "family": {
+        "id": 1,
+        "name": "Family 1"
+      }
+    },
+    {
+      "id": 5,
+      "first_name": "Person 5",
+      "last_name": "Surname 5",
+      "birthdate": "2000-05-05",
+      "family_id": 1,
+      "family": {
+        "id": 1,
+        "name": "Family 1"
+      }
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "total": 5
+  }
+}
